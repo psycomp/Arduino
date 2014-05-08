@@ -23,8 +23,5 @@ void setup();
 
 //add your function definitions for the project Telegraph here
 
-
-
-
 //Do not add code below this line
 #endif /* _Telegraph_H_ */
