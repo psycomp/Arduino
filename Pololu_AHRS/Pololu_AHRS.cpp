@@ -24,7 +24,7 @@
 #include <EEPROM.h>
 #include "L3G.h"
 #include "LSM303.h"
-#include "LPS331.h"
+// #include "LPS331.h"
 #include "imuMaths.h"
 
 #define OUTPUT_EULER 0 //heading, pitch, roll
@@ -34,7 +34,7 @@
 
 L3G l3g;
 LSM303 lsm303;
-LPS331 lps331;
+// LPS331 lps331;
 imu::Quaternion rotation_buf;
 imu::Quaternion offset;
 
@@ -156,10 +156,12 @@ void output(imu::Quaternion rotation)
 		break;
 	}
 
+/*
 	Serial.print("alt: ");
 	Serial.println(alt);
 	Serial.print("temp: ");
 	Serial.println(temp);
+*/
 }
 
 
@@ -177,8 +179,10 @@ void setup()
     l3g.measureOffsets();
     lsm303.init();
     lsm303.enableDefault();
+/*
     lps331.init();
     lps331.enableDefault();
+*/
 
 	mag_cal_counter = 0;
 
@@ -309,8 +313,10 @@ void loop()
 	imu::Quaternion rotation = offset.conjugate()*rotation_buf;
 	rotation.normalize();
 
-	alt = (0.1 * lps331.pressureToAltitudeFeet(lps331.readPressureInchesHg())) + (0.9) * alt;
+/*
+ 	alt = (0.1 * lps331.pressureToAltitudeFeet(lps331.readPressureInchesHg())) + (0.9) * alt;
 	temp = (0.1 * lps331.readTemperatureC()) + (0.9) * temp;
+*/
 
 	if(auto_output)
 		output(rotation);
